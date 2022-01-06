@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="../lib/jquery-ui-1.8.4.css" />
 	<link rel="stylesheet" type="text/css" href="reset.css" />
 	<link rel="stylesheet" type="text/css" href="../jquery.ganttView.css" />
+	<!-- bootstrap library -->
 	<style type="text/css">
 		body {
 			font-family: tahoma, verdana, helvetica;
@@ -28,37 +29,191 @@
 	<br /><br />
 	<div id="eventMessage"></div>
 
+	
+	<!-- modal -->
+	<div class="backdrop"></div>
+	<div class="custom-modal custom-modal-w-sm">
+		<div class="project-name">
+			<a href="javascript:void(0);" class="close-icon"></a>
+			<form id="resourceForm">
+				<div class="form-group">
+					<label class="label-v1" for="projectName">Project Name</label>
+					<select id="projectName" class="form-control form-control-v4 form-select" required>
+						<option value disabled selected>Select Project</option>
+						<option value="icici insta biz">Icici Insta Biz</option>
+						<option value="usgi">USGI</option>
+						<option value="tata capital">Tata Capital</option>
+						<option value="kotak security">Kotak Security</option>
+						<option value="ninja timesheet">Ninja Timesheet</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label class="label-v1" for="startDate">Start Date</label>
+					<input type="date" class="form-control form-control-v4" id="startDate" placeholder="Start Date" required />
+				</div>
+				<div class="form-group">
+					<label class="label-v1" for="endDate">End Date</label>
+					<input type="date" class="form-control form-control-v4" id="endDate" placeholder="End Date" req />
+				</div>
+				<button type="submit" class="btn btn-v1">Submit</button>
+			</form>
+		</div>
+	</div>
+
+
+
+
+	<!-- Resource allocation popup end -->
 	<script type="text/javascript" src="../lib/jquery-1.4.2.js"></script>
 	<script type="text/javascript" src="../lib/date.js"></script>
 	<script type="text/javascript" src="../lib/jquery-ui-1.8.4.js"></script>
 	<script type="text/javascript" src="../jquery.ganttView.js"></script>
-	<script type="text/javascript" src="data.js"></script>
+	<!-- <script type="text/javascript" src="data.js"></script> -->
 	<script type="text/javascript">
-		$(function () {		
-			$("#ganttChart").ganttView({
-				data: ganttData,
-				slideWidth: 900,
-				behavior: {
-					onClick: function (data) {
-						var msg = "You clicked on an event: { start: " + data.start.toString("M/d/yyyy") + ", end: " + data.end.toString("M/d/yyyy") + " }";
-						$("#eventMessage").text(msg);
+		
+
+
+			$(function () {			
+				// =========== JSON data start ============ //
+				var ganttData = [
+					{
+						id: 1, name: "SMITH", series: [
+							{ name: "USGI", start: new Date(2022, 00, 01), end: new Date(2022, 00, 03), color: '#000' },
+							{ name: "ICICI Video KYC", start: new Date(2022, 00, 02), end: new Date(2022, 00, 05), color: "#f0f0f0" },
+							{ name: "USGI", start: new Date(2022, 00, 25), end: new Date(2022, 00, 27), color: '#000' },
+						]
 					},
-					onResize: function (data) {
-						var msg = "You resized an event: { start: " + data.start.toString("M/d/yyyy") + ", end: " + data.end.toString("M/d/yyyy") + " }";
-						$("#eventMessage").text(msg);
-						// console.log(data);
+					{
+						id: 2, name: "ALLEN", series: [
+							{ name: "Kotak Security", start: new Date(2022, 00, 05), end: new Date(2022, 00, 20) },
+							{ name: "WCT", start: new Date(2022, 00, 06), end: new Date(2022, 00, 17), color: "#f0f0f0" },
+							{ name: "Axis POC", start: new Date(2022, 00, 06), end: new Date(2022, 00, 17), color: "#e0e0e0" }
+						]
 					},
-					onDrag: function (data) {
-						var msg = "You dragged an event: { start: " + data.start.toString("M/d/yyyy") + ", end: " + data.end.toString("M/d/yyyy") + " }";
-						$("#eventMessage").text(msg);
+					{
+						id: 3, name: "WARD", series: [
+							{ name: "Ninja Timesheet", start: new Date(2022, 00, 11), end: new Date(2022, 01, 03) },
+							{ name: "Bajaj Allianz", start: new Date(2022, 00, 15), end: new Date(2022, 01, 03), color: "#F90" }
+						]
+					},
+					{
+						id: 4, name: "JONES", series: [
+							{ name: "SBIL", start: new Date(2022, 01, 01), end: new Date(2022, 01, 03) },
+							{ name: "TATA AIA", start: new Date(2022, 01, 01), end: new Date(2022, 01, 05), color: "#f0f0f0" }
+						]
+					},
+					{
+						id: 5, name: "MARTIN", series: [
+							{ name: "USGI", start: new Date(2022, 02, 01), end: new Date(2022, 03, 20) },
+							{ name: "ThermoFisher", start: new Date(2022, 02, 01), end: new Date(2022, 03, 26), color: "#f0f0f0" }
+						]
+					},
+					{
+						id: 6, name: "BLAKE", series: [
+							{ name: "HDFC Life", start: new Date(2022, 00, 05), end: new Date(2022, 00, 20) },
+							{ name: "PolicyBazar", start: new Date(2022, 00, 06), end: new Date(2022, 00, 17), color: "#f0f0f0" },
+							{ name: "Zerodha", start: new Date(2022, 00, 06), end: new Date(2022, 00, 20), color: "#e0e0e0" }
+						]
+					},
+					{
+						id: 7, name: "CLARK", series: [
+							{ name: "Hindustan Uniliver", start: new Date(2022, 00, 11), end: new Date(2022, 01, 03) }
+						]
+					},
+					{
+						id: 8, name: "SCOTT", series: [
+							{ name: "TATA Captial", start: new Date(2022, 01, 01), end: new Date(2022, 01, 03) },
+							{ name: "Bajaj 360 Web App", start: new Date(2022, 01, 01), end: new Date(2022, 01, 05), color: "#f0f0f0" }
+						]
+					}
+				];
+				// =========== JSON data end ============ //
+
+				$("#ganttChart").ganttView({
+					data:  ganttData ,
+					slideWidth: 900,
+					behavior: {
+						onClick: function (data) {
+							var msg = "You clicked on an event: { start: " + data.start.toString("d/M/yyyy") + ", end: " + data.end.toString("d/M/yyyy") + " }";
+							$("#eventMessage").text(msg);
+						},
+						onResize: function (data) {
+							var msg = "You resized an event: { start: " + data.start.toString("d/M/yyyy") + ", end: " + data.end.toString("d/M/yyyy") + " }";
+							$("#eventMessage").text(msg);
+							// console.log(data);
+						},
+						onDrag: function (data) {
+							var msg = "You dragged an event: { start: " + data.start.toString("d/M/yyyy") + ", end: " + data.end.toString("d/M/yyyy") + " }";
+							$("#eventMessage").text(msg);
+						}
+					}
+				});
+				$('.insert-record').each(function (index) {
+					// $(this).attr('onclick','openModal('+index+')');
+					$(this).attr('data-toggle', 'modal');
+					$(this).attr('data-target', 'resourceModal');
+					$(this).attr('data-id', index + 1);
+				})
+
+				// open modal popup
+				$('.insert-record').click(function () {
+					$('.backdrop').addClass('open');
+					$('.custom-modal').addClass('animated_modal');
+					openModel($(this).attr('data-id'), ganttData);
+				})
+				// close modal popup
+				$('.close-icon').click(function () {
+					$('.backdrop').removeClass('open');
+					$('.custom-modal').removeClass('animated_modal');
+				})
+
+
+				// $("#ganttChart").ganttView("setSlideWidth", 600);
+				// call again entry is done
+				function loadChart() {
+					alert('again render chart')
+					$("#ganttChart").ganttView({
+						data: ganttData,
+						slideWidth: 900,
+						behavior: {
+							onClick: function (data) {
+								var msg = "You clicked on an event: { start: " + data.start.toString("d/M/yyyy") + ", end: " + data.end.toString("d/M/yyyy") + " }";
+								$("#eventMessage").text(msg);
+							},
+							onResize: function (data) {
+								var msg = "You resized an event: { start: " + data.start.toString("d/M/yyyy") + ", end: " + data.end.toString("d/M/yyyy") + " }";
+								$("#eventMessage").text(msg);
+								// console.log(data);
+							},
+							onDrag: function (data) {
+								var msg = "You dragged an event: { start: " + data.start.toString("d/M/yyyy") + ", end: " + data.end.toString("d/M/yyyy") + " }";
+								$("#eventMessage").text(msg);
+							}
+						}
+					});
+					
+				}
+
+				function openModel(index, data) {
+					for (var i in data) {
+						if (index == data[i].id) {
+							// console.log(index,data[i].id);
+							var resourceBooking;
+							$('#resourceForm').submit(function (e) {
+								resourceBooking = "";
+								e.preventDefault();
+								resourceBooking = { name: $('#projectName').val(), start: new Date($('#startDate').val()), end: new Date($('#endDate').val()), color: '#777' },
+									data[i].series.push(resourceBooking);
+								console.log(data[i].series);
+								loadChart();
+							})
+						}
 					}
 				}
-			});
 
-			// $("#ganttChart").ganttView("setSlideWidth", 600);
-		});
+			})
+	
 	</script>
-
 </body>
 
 </html>

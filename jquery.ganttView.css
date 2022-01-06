@@ -10,129 +10,88 @@ div.ganttview-vtheader,
 div.ganttview-vtheader-item-name,
 div.ganttview-vtheader-series,
 div.ganttview-grid,
-div.ganttview-grid-row-cell {
-	float: left;
-}
+div.ganttview-grid-row-cell { float: left; } 
 
 div.ganttview-hzheader-month,
-div.ganttview-hzheader-day {
-	text-align: center;
-}
+div.ganttview-hzheader-day { text-align: center; } 
 
 div.ganttview-grid-row-cell.last,
 div.ganttview-hzheader-day.last,
-div.ganttview-hzheader-month.last {
-	border-right: none;
-}
+div.ganttview-hzheader-month.last { border-right: none; } 
 
-div.ganttview {
-	border: 1px solid #999;
-}
+div.ganttview { border: 1px solid #999; } 
 
 
 /* Horizontal Header */
 
-div.ganttview-hzheader-month {
-	width: 60px;
-	height: 20px;
-	border-right: 1px solid #d0d0d0;
-	line-height: 20px;
-}
+div.ganttview-hzheader-month { width: 60px; height: 20px; border-right: 1px solid #d0d0d0; line-height: 20px; } 
 
-div.ganttview-hzheader-day {
-	width: 20px;
-	height: 20px;
-	border-right: 1px solid #f0f0f0;
-	border-top: 1px solid #d0d0d0;
-	line-height: 20px;
-	color: #777;
-}
+div.ganttview-hzheader-day { width: 20px; height: 20px; border-right: 1px solid #f0f0f0; border-top: 1px solid #d0d0d0; line-height: 20px; color: #777; } 
 
 
 /* Vertical Header */
 
-div.ganttview-vtheader {
-	margin-top: 41px;
-	width: 240px;
-	overflow: hidden;
-	background-color: #fff;
-}
+div.ganttview-vtheader { margin-top: 41px; width: 240px; overflow: hidden; background-color: #fff; } 
 
-div.ganttview-vtheader-item {
-	overflow: hidden;
-	color: #666;
-}
+div.ganttview-vtheader-item { overflow: hidden; color: #666; } 
 
-div.ganttview-vtheader-item-name {
-	width: 100px;
-	padding-left: 5px;
-	border-top: 1px solid #d0d0d0;
-	line-height: 16px;
-}
+div.ganttview-vtheader-item-name { /* custom css start */
+position: relative; /* custom css end*/
+width: 100px; padding-left: 5px; border-top: 1px solid #d0d0d0; line-height: 16px; } 
 
-div.ganttview-vtheader-series-name {
-	width: 130px;
-	height: 31px;
-	border-top: 1px solid #d0d0d0;
-	line-height: 16px;
-	padding-left: 5px;
-}
+/* custom css start */
+.insert-record { cursor: pointer; position: relative; top: Calc(0% + 5px); right: Calc(0% - 20px); display: inline-block; width: 15px; height: 15px; border-radius: 50px; padding: 2px; border: 1px solid #000; } 
+.insert-record:before,
+.insert-record:after { content: ''; position: absolute; top: 50%; left: 50%; background: #000; transform: translate(-50%,-50%); width: 10px; height: 2px; border-radius: 50px; } 
+
+.insert-record:after { transform: translate(Calc(-5px), -1px) rotate(
+90deg); } 
+
+
+/* custom css end */
+
+div.ganttview-vtheader-series-name { width: 130px; height: 31px; border-top: 1px solid #d0d0d0; line-height: 16px; padding-left: 5px; } 
 
 
 /* Slider */
 
-div.ganttview-slide-container {
-	overflow: auto;
-	border-left: 1px solid #999;
-}
+div.ganttview-slide-container { overflow: auto; border-left: 1px solid #999; } 
 
 
 /* Grid */
 
-div.ganttview-grid-row-cell {
-	width: 20px;
-	height: 31px;
-	border-right: 1px solid #f0f0f0;
-	border-top: 1px solid #f0f0f0;
-}
-
-div.ganttview-grid-row-cell.ganttview-weekend {
-	background-color: #fafafa;
-}
-
-
+div.ganttview-grid-row-cell { width: 20px; height: 31px; border-right: 1px solid #f0f0f0; border-top: 1px solid #f0f0f0; } 
+div.ganttview-grid-row-cell.ganttview-weekend { background-color: #fafafa; } 
 /* Blocks */
-
-div.ganttview-blocks {
-	margin-top: 40px;
-}
-
-div.ganttview-block-container {
-	height: 28px;
-	padding-top: 4px;
-}
-
-div.ganttview-block {
-	position: relative;
-	height: 25px;
-	background-color: #E5ECF9;
-	border: 1px solid #c0c0c0;
-	border-radius: 3px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-}
-
-div.ganttview-block-text {
-	position: absolute;
-	height: 12px;
-	font-size: 0.8em;
-	color: #999;
-	padding: 2px 3px;
-}
-
-
+div.ganttview-blocks { margin-top: 40px; } 
+div.ganttview-block-container { height: 28px; padding-top: 4px; } 
+div.ganttview-block { position: relative; height: 25px; background-color: #E5ECF9; border: 1px solid #c0c0c0; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; } 
+div.ganttview-block-text { position: absolute; height: 12px; font-size: 0.8em; color: #999; padding: 2px 3px; } 
 /* Adjustments for jQuery UI Styling */
+div.ganttview-block div.ui-resizable-handle.ui-resizable-s { bottom: -0; } 
 
-div.ganttview-block div.ui-resizable-handle.ui-resizable-s {
-	bottom: -0;
-}
+/* New CSS Start */
+
+/* form control  */
+.form-control { padding: 6px 12px !important; outline: none; box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.1) !important; border-radius: 8px;} 
+.form-control-v4 { width: 100%; box-sizing: border-box;}
+.form-control:focus,
+.form-control:active { box-shadow: none !important; } 
+
+/* Modal  */
+.backdrop { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); width: 100%; display: none; } 
+.backdrop.open { display: block; } 
+.custom-modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-100%); transition: all .3s ease; background: #EEE; padding: 40px; border-radius: 8px; display: none;  } 
+.custom-modal.animated_modal { animation-name: slideDown; animation-timing-function: linear; animation-iteration-count: 1; animation-fill-mode: forwards; animation-duration: .4s; animation-direction: normal; transition: all .2s ease; display: block; } 
+@keyframes slideDown {100% { transform: translate(-50%, -50%); } 
+ }
+.close-icon { display: inline-block;background: url('./images/close-icon.svg') no-repeat center;background-size: contain;z-index: 10;width: 14px;height: 14px;cursor: pointer;transition: all .3s ease;  position: absolute; top: 20px; right: 20px; transition: all 0.5s ease;} 
+.close-icon:hover { transform: rotate(90deg) scale(1.02);}
+.custom-modal-w-sm { max-width: 450px; width: 100%; } 
+/* btn */
+.btn { font-size: 16px; line-height: 20px; color: #000; display: inline-block; padding: 8px 15px !important; border-radius: 4px;} 
+.btn-v1 { background: rebeccapurple; color: #FFF; border:none;}
+/* label */
+.label-v1 { display: block; margin: 0 0 10px;}
+.form-group { margin: 0 0 15px;}
+/* New CSS End */

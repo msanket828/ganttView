@@ -144,7 +144,11 @@ behavior: {
                 itemDiv.append(jQuery("<div>", {
                     "class": "ganttview-vtheader-item-name",
                     "css": { "height": (data[i].series.length * cellHeight) + "px" }
-                }).append(data[i].name));
+										// appending custom anchor tag for the popup
+									}).append($('<span>'+ data[i].name+'</span>'),
+									$("<a>", { "class": "insert-record" 																	
+								})
+								));							
                 var seriesDiv = jQuery("<div>", { "class": "ganttview-vtheader-series" });
                 for (var j = 0; j < data[i].series.length; j++) {
                     seriesDiv.append(jQuery("<div>", { "class": "ganttview-vtheader-series-name" })
@@ -381,5 +385,6 @@ behavior: {
 			return [minStart, maxEnd];
 		}
     };
-
-})(jQuery);
+	
+	})(jQuery);
+	

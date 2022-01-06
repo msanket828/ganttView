@@ -1,9 +1,9 @@
 var ganttData = [
 	{
 		id: 1, name: "SMITH", series: [
-			{ name: "USGI", start: new Date(2022,00,01), end: new Date(2022,00,03), color: '#000', time: '5:30'},
+			{ name: "USGI", start: new Date(2022,00,01), end: new Date(2022,00,03), color: '#000'},
 			{ name: "ICICI Video KYC", start: new Date(2022,00,02), end: new Date(2022,00,05), color: "#f0f0f0" },
-			{ name: "USGI", start: new Date(2022,00,25), end: new Date(2022,00,27), color: '#000', time: '5:30'},			
+			{ name: "USGI", start: new Date(2022,00,25), end: new Date(2022,00,27), color: '#000'},			
 		]
 	}, 
 	{

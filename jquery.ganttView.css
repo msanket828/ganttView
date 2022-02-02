@@ -3,6 +3,10 @@ jQuery.ganttView v.0.8.0
 Copyright (c) 2010 JC Grubbs - jc.grubbs@devmynd.com
 MIT License Applies
 */
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400; 500; 600; 700; 800&display=swap'); */
+ 
+
+body { font-family: 'Montserrat', sans-serif; font-size: 14px; } 
 
 div.ganttview-hzheader-month,
 div.ganttview-hzheader-day,
@@ -40,17 +44,17 @@ position: relative; /* custom css end*/
 width: 100px; padding-left: 5px; border-top: 1px solid #d0d0d0; line-height: 16px; } 
 
 /* custom css start */
-.insert-record { cursor: pointer; position: relative; top: Calc(0% + 5px); right: Calc(0% - 20px); display: inline-block; width: 15px; height: 15px; border-radius: 50px; padding: 2px; border: 1px solid #000; } 
+.insert-record { cursor: pointer; position: relative; top: Calc(0px + 5px); margin: 0 0 0 10px; display: inline-block; width: 18px; height: 18px; border-radius: 50px; padding: 2px; box-shadow: 0px 2px 4px 0px #00000040; transition: all .1s linear; background: url('./images/plus-icon.svg') no-repeat center; background-size: 10px; } 
+.insert-record:hover { background-color: #EEE; transform: scale(1.2); } 
+/* .insert-record:hover:before, 
 .insert-record:before,
-.insert-record:after { content: ''; position: absolute; top: 50%; left: 50%; background: #000; transform: translate(-50%,-50%); width: 10px; height: 2px; border-radius: 50px; } 
+.insert-record:after { content: ''; position: absolute; top: 50%; left: 50%; background: #333; transform: translate(-50%,-50%); width: 10px; height: 0.5px; border-radius: 50px; } */
 
-.insert-record:after { transform: translate(Calc(-5px), -1px) rotate(
-90deg); } 
 
 
 /* custom css end */
 
-div.ganttview-vtheader-series-name { width: 130px; height: 31px; border-top: 1px solid #d0d0d0; line-height: 16px; padding-left: 5px; } 
+div.ganttview-vtheader-series-name { width: 130px; height: 31px; border-top: 1px solid #d0d0d0; line-height: 15px; padding-left: 5px; font-size: 12px; } 
 
 
 /* Slider */
@@ -61,37 +65,80 @@ div.ganttview-slide-container { overflow: auto; border-left: 1px solid #999; }
 /* Grid */
 
 div.ganttview-grid-row-cell { width: 20px; height: 31px; border-right: 1px solid #f0f0f0; border-top: 1px solid #f0f0f0; } 
-div.ganttview-grid-row-cell.ganttview-weekend { background-color: #fafafa; } 
+div.ganttview-grid-row-cell.ganttview-weekend { background-color: #eadddd } 
+/* #fafafa; */
 /* Blocks */
 div.ganttview-blocks { margin-top: 40px; } 
 div.ganttview-block-container { height: 28px; padding-top: 4px; } 
 div.ganttview-block { position: relative; height: 25px; background-color: #E5ECF9; border: 1px solid #c0c0c0; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; } 
-div.ganttview-block-text { position: absolute; height: 12px; font-size: 0.8em; color: #999; padding: 2px 3px; } 
+div.ganttview-block-text { position: absolute; height: auto; font-size: 0.8em; color: #000; padding: 2px 3px; width: auto; } 
 /* Adjustments for jQuery UI Styling */
 div.ganttview-block div.ui-resizable-handle.ui-resizable-s { bottom: -0; } 
 
-/* New CSS Start */
-
-/* form control  */
-.form-control { padding: 6px 12px !important; outline: none; box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.1) !important; border-radius: 8px;} 
-.form-control-v4 { width: 100%; box-sizing: border-box;}
+/*================================================ New CSS Start ====================================================*/
+.ganttview-hzheader-month,
+.ganttview-hzheader-day { background: #ed453fdb; color: #FFF !important; } 
+.ganttview-hzheader-day { border-right: 1px solid #ed453fdb; } 
+.ganttview-vtheader { position: relative; margin-top: auto !important; padding-top: 41px; } 
+.ganttview-vtheader .search-bar { position: absolute; top: 0; left: 0; width: 100%; height: 41px; display: flex; align-items: center; justify-content: center; background-color: #ed453fdb; } 
+.ganttview-vtheader .search-form-group { position: relative; flex: 0.7; } 
+.ganttview-vtheader .search-bar input { border:none; border: 1px solid #D8D8D8; font-size: 14px; font-weight: 500; line-height: 20px; padding: 5px 30px 5px 5px; width: -webkit-fill-available; } 
+.ganttview-vtheader .search-cta { background: url('./images/search.png') no-repeat center; width: 30px; height: 100%; background-size: 15px 15px; position: absolute; top: 50%; right: 0; transform: translateY(-50%); background-color: #E5E5E5; } 
+.ganttview-vtheader .search-cta:hover,
+.ganttview-vtheader .search-cta:active { background-color: #e6c9c9; } 
+.ganttview-block-text { top: 50%; left: 50%; transform: translate(-50%,-50%); text-shadow: 0 0 1px rgba(0, 0, 0, 0.5); position: relative; } 
+.ganttview-block { position: relative; } 
+.ganttview-block:before { position: absolute; width: 200px; height: auto; background: #FBCD09; border: 1px solid #FBCD09; bottom: 50%; left: calc(100% + 5px); transform: translateY(50%); border-radius: 8px; padding: 10px; color: #000; font-weight: 500; } 
+.ganttview-block:after { position: absolute; bottom: 30%; left: calc(100% - 5px); transform: translateY(-50%); border-width: 5px; border-color: transparent #FBCD09 transparent transparent; border-style: solid; } 
+.ganttview-block:hover:after { content: ''; } 
+.ganttview-block:hover:before { content: attr(data-sdate) ' - ' attr(data-edate) ' (' attr(data-type) ')'; display: flex; align-items: center; justify-content: center; z-index: 999; } 
+.ganttview { overflow-y: auto; } 
+.ganttview-vtheader-item { transition: all .3s ease; position: relative; } 
+.ganttview-slide-container { width: auto !important; } 
+.ganttview-vtheader { width: 28% !important; } 
+.ganttview-vtheader-item-name { width: 55% !important; } 
+.ganttview-vtheader-series { width: 42% !important; } 
+.ganttview-vtheader-series-name { width: 100% !important; padding: 10px 0; } 
+.ganttview-block { padding: 10px 0; } 
+.ganttview-block-container { height: 48px !important; } 
+.ganttview-grid-row-cell { padding: 10px 0; } 
+.ganttview-vtheader-item-name .emp-name { font-size: 14px; line-height: 18px; color: #444444; font-weight: 500; } 
+.ganttview-vtheader-item-name .department-name { margin: 5px 0 5px; font-family: sans-serif; font-weight: 500; } 
+.ganttview-vtheader-item:hover .ganttview-vtheader-item-name { height: auto !important; } 
+.ganttview-vtheader-item-name .utilisation-perc { display: inline-block; margin-left: 10px; background: #FBCD09; border-radius: 4px; color: #333; font-size: 12px; line-height: 15px; padding: 5px; font-weight: 550; } 
+.ganttview-vtheader-item-name .reporting-manager { font-weight: 500; margin: 5px 0; } 
+.ganttview-vtheader-item-name .project-count { font-weight: 500; margin: 5px 0; } 
+.ganttview-vtheader-item-name .department-name span,
+.ganttview-vtheader-item-name .project-count span,
+.ganttview-vtheader-item-name .reporting-manager span { font-weight: 550; } 
+/* form control */
+.form-control { padding: 6px 12px !important; outline: none; box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.1) !important; border-radius: 8px; font-size: 14px; line-height: 18px; } 
+.form-control-v4 { width: 100%; box-sizing: border-box; } 
 .form-control:focus,
 .form-control:active { box-shadow: none !important; } 
 
-/* Modal  */
+/* Modal */
 .backdrop { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); width: 100%; display: none; } 
 .backdrop.open { display: block; } 
-.custom-modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-100%); transition: all .3s ease; background: #EEE; padding: 40px; border-radius: 8px; display: none;  } 
+.custom-modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-100%); transition: all .3s ease; background: #FFF; padding: 25px 40px; border-radius: 8px; display: none; } 
 .custom-modal.animated_modal { animation-name: slideDown; animation-timing-function: linear; animation-iteration-count: 1; animation-fill-mode: forwards; animation-duration: .4s; animation-direction: normal; transition: all .2s ease; display: block; } 
-@keyframes slideDown {100% { transform: translate(-50%, -50%); } 
+@keyframes slideDown { 100% { transform: translate(-50%, -50%); } 
  }
-.close-icon { display: inline-block;background: url('./images/close-icon.svg') no-repeat center;background-size: contain;z-index: 10;width: 14px;height: 14px;cursor: pointer;transition: all .3s ease;  position: absolute; top: 20px; right: 20px; transition: all 0.5s ease;} 
-.close-icon:hover { transform: rotate(90deg) scale(1.02);}
+.close-icon { display: inline-block; background: url('./images/close-icon.svg') no-repeat center; background-size: contain; z-index: 10; width: 14px; height: 14px; cursor: pointer; transition: all .3s ease; position: absolute; top: 20px; right: 20px; transition: all 0.5s ease; } 
+.close-icon:hover { transform: rotate(90deg) scale(1.02); } 
 .custom-modal-w-sm { max-width: 450px; width: 100%; } 
 /* btn */
-.btn { font-size: 16px; line-height: 20px; color: #000; display: inline-block; padding: 8px 15px !important; border-radius: 4px;} 
-.btn-v1 { background: rebeccapurple; color: #FFF; border:none;}
+.btn { font-size: 16px; line-height: 20px; color: #000; display: inline-block; padding: 8px 15px !important; border-radius: 4px; cursor: pointer; } 
+.btn-v1 { background: linear-gradient(
+ 94.04deg
+ , #F2672D 12.78%, #ED453F 83.85%); color: #FFF; border:none; } 
+.btn-danger { background: #FFF; color: #F2672D !important; border: 1px solid #F2672D; } 
 /* label */
-.label-v1 { display: block; margin: 0 0 10px;}
-.form-group { margin: 0 0 15px;}
-/* New CSS End */
+.label-v1 { display: block; margin: 0 0 10px; } 
+.form-group { margin: 0 0 15px; } 
+
+.d-none { display: none !important; } 
+.view-more-link { font-size: 12px; line-height: 15px; color: #6867AC; text-decoration: underline; cursor: pointer; margin: 0 0 10px; position: absolute; top: Calc(100% - 20px); left: 50%; transform: translateX(-50%); } 
+.modal-title { font-size: 25px; line-height: 30px; font-style: normal; text-align: center; margin: 0 0 20px; color: #444444; } 
+.form-select { -webkit-appearance: none; background: url(../images/selectbox.svg) no-repeat,#FFF; background-position: 95% 50%; padding: 6px 35px 6px 12px !important; } 
+/*================================================== New CSS End ==============================================*/

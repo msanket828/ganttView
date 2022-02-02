@@ -3,48 +3,67 @@
 <html lang="en">
 
 <head>
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+		rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="../lib/jquery-ui-1.8.4.css" />
 	<link rel="stylesheet" type="text/css" href="reset.css" />
 	<link rel="stylesheet" type="text/css" href="../jquery.ganttView.css" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<!-- bootstrap library -->
 	<style type="text/css">
-		body {
-			font-family: tahoma, verdana, helvetica;
-			font-size: 0.8em;
-			padding: 10px;
-		}
-
 		.ganttChart {
 			max-width: 1366px;
-			width: 100%;
+			width: 100% !important;
 			margin: 0 auto;
+			background: #FFF;
+		}
+
+		main {
+			padding: 40px 0;
+			background: #E5E5E5;
 		}
 	</style>
 	<title>jQuery Gantt</title>
 </head>
 
 <body>
+	<main>
+		<div id="ganttChart" class="ganttChart">
 
-	<div id="ganttChart" class="ganttChart"></div>
-	<br /><br />
-	<div id="eventMessage"></div>
+		</div>
+		<br /><br />
+		<div id="eventMessage"></div>
+	</main>
 
-	
 	<!-- modal -->
 	<div class="backdrop"></div>
-	<div class="custom-modal custom-modal-w-sm">
+	<div class="custom-modal custom-modal-w-sm" id="addResource">
 		<div class="project-name">
 			<a href="javascript:void(0);" class="close-icon"></a>
-			<form id="resourceForm">
+			<h2 class="modal-title">Add Resource</h2>
+			<form id="addResourceForm">
 				<div class="form-group">
 					<label class="label-v1" for="projectName">Project Name</label>
 					<select id="projectName" class="form-control form-control-v4 form-select" required>
 						<option value disabled selected>Select Project</option>
-						<option value="icici insta biz">Icici Insta Biz</option>
-						<option value="usgi">USGI</option>
-						<option value="tata capital">Tata Capital</option>
-						<option value="kotak security">Kotak Security</option>
-						<option value="ninja timesheet">Ninja Timesheet</option>
+						<option value="ICICI Insta Biz">Icici Insta Biz</option>
+						<option value="USGI">USGI</option>
+						<option value="Tata Capital">Tata Capital</option>
+						<option value="Kotak Security">Kotak Security</option>
+						<option value="Ninja Timesheet">Ninja Timesheet</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label class="label-v1" for="taskType">Task Type</label>
+					<input type="text" class="form-control form-control-v4" id="taskType" placeholder="Task Type" required />
+				</div>
+				<div class="form-group">
+					<label class="label-v1" for="bookingType">Booking Type</label>
+					<select id="bookingType" class="form-control form-control-v4 form-select" required>
+						<option value disabled selected>Select Type</option>
+						<option value="major">Major</option>
+						<option value="minor">Minor</option>
 					</select>
 				</div>
 				<div class="form-group">
@@ -53,13 +72,57 @@
 				</div>
 				<div class="form-group">
 					<label class="label-v1" for="endDate">End Date</label>
-					<input type="date" class="form-control form-control-v4" id="endDate" placeholder="End Date" req />
+					<input type="date" class="form-control form-control-v4" id="endDate" placeholder="End Date" required />
 				</div>
 				<button type="submit" class="btn btn-v1">Submit</button>
+
 			</form>
 		</div>
 	</div>
 
+
+	<div class="custom-modal custom-modal-w-sm" id="editResource">
+		<div class="project-name">
+			<a href="javascript:void(0);" class="close-icon"></a>
+			<h2 class="modal-title">Edit Resource</h2>
+			<form id="EditResourceForm">
+				<div class="form-group">
+					<label class="label-v1" for="projectName">Project Name</label>
+					<select id="editProjectName" class="form-control form-control-v4 form-select" required>
+						<option value disabled selected>Select Project</option>
+						<option value="ICICI Insta Biz">Icici Insta Biz</option>
+						<option value="USGI">USGI</option>
+						<option value="Tata Capital">Tata Capital</option>
+						<option value="Kotak Security">Kotak Security</option>
+						<option value="Ninja Timesheet">Ninja Timesheet</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label class="label-v1" for="editTaskType">Task Type</label>
+					<input type="text" class="form-control form-control-v4" id="editTaskType" placeholder="Task Type" required />
+				</div>
+				<div class="form-group">
+					<label class="label-v1" for="editBookingType">Booking Type</label>
+					<select id="editBookingType" class="form-control form-control-v4 form-select" required>
+						<option value disabled selected>Select Type</option>
+						<option value="major">Major</option>
+						<option value="minor">Minor</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label class="label-v1" for="startDate">Start Date</label>
+					<input type="date" class="form-control form-control-v4" id="editStartDate" placeholder="Start Date"
+						required />
+				</div>
+				<div class="form-group">
+					<label class="label-v1" for="endDate">End Date</label>
+					<input type="date" class="form-control form-control-v4" id="editEndDate" placeholder="End Date" required />
+				</div>
+				<button type="submit" class="btn btn-v1">Submit</button>
+				<button type="button" class="btn btn-v1 btn-danger">Delete</button>
+			</form>
+		</div>
+	</div>
 
 
 
@@ -68,151 +131,141 @@
 	<script type="text/javascript" src="../lib/date.js"></script>
 	<script type="text/javascript" src="../lib/jquery-ui-1.8.4.js"></script>
 	<script type="text/javascript" src="../jquery.ganttView.js"></script>
-	<!-- <script type="text/javascript" src="data.js"></script> -->
 	<script type="text/javascript">
-		
 
 
-			$(function () {			
-				// =========== JSON data start ============ //
-				var ganttData = [
-					{
-						id: 1, name: "SMITH", series: [
-							{ name: "USGI", start: new Date(2022, 00, 01), end: new Date(2022, 00, 03), color: '#000' },
-							{ name: "ICICI Video KYC", start: new Date(2022, 00, 02), end: new Date(2022, 00, 05), color: "#f0f0f0" },
-							{ name: "USGI", start: new Date(2022, 00, 25), end: new Date(2022, 00, 27), color: '#000' },
-						]
-					},
-					{
-						id: 2, name: "ALLEN", series: [
-							{ name: "Kotak Security", start: new Date(2022, 00, 05), end: new Date(2022, 00, 20) },
-							{ name: "WCT", start: new Date(2022, 00, 06), end: new Date(2022, 00, 17), color: "#f0f0f0" },
-							{ name: "Axis POC", start: new Date(2022, 00, 06), end: new Date(2022, 00, 17), color: "#e0e0e0" }
-						]
-					},
-					{
-						id: 3, name: "WARD", series: [
-							{ name: "Ninja Timesheet", start: new Date(2022, 00, 11), end: new Date(2022, 01, 03) },
-							{ name: "Bajaj Allianz", start: new Date(2022, 00, 15), end: new Date(2022, 01, 03), color: "#F90" }
-						]
-					},
-					{
-						id: 4, name: "JONES", series: [
-							{ name: "SBIL", start: new Date(2022, 01, 01), end: new Date(2022, 01, 03) },
-							{ name: "TATA AIA", start: new Date(2022, 01, 01), end: new Date(2022, 01, 05), color: "#f0f0f0" }
-						]
-					},
-					{
-						id: 5, name: "MARTIN", series: [
-							{ name: "USGI", start: new Date(2022, 02, 01), end: new Date(2022, 03, 20) },
-							{ name: "ThermoFisher", start: new Date(2022, 02, 01), end: new Date(2022, 03, 26), color: "#f0f0f0" }
-						]
-					},
-					{
-						id: 6, name: "BLAKE", series: [
-							{ name: "HDFC Life", start: new Date(2022, 00, 05), end: new Date(2022, 00, 20) },
-							{ name: "PolicyBazar", start: new Date(2022, 00, 06), end: new Date(2022, 00, 17), color: "#f0f0f0" },
-							{ name: "Zerodha", start: new Date(2022, 00, 06), end: new Date(2022, 00, 20), color: "#e0e0e0" }
-						]
-					},
-					{
-						id: 7, name: "CLARK", series: [
-							{ name: "Hindustan Uniliver", start: new Date(2022, 00, 11), end: new Date(2022, 01, 03) }
-						]
-					},
-					{
-						id: 8, name: "SCOTT", series: [
-							{ name: "TATA Captial", start: new Date(2022, 01, 01), end: new Date(2022, 01, 03) },
-							{ name: "Bajaj 360 Web App", start: new Date(2022, 01, 01), end: new Date(2022, 01, 05), color: "#f0f0f0" }
-						]
-					}
-				];
-				// =========== JSON data end ============ //
-
-				$("#ganttChart").ganttView({
-					data:  ganttData ,
-					slideWidth: 900,
-					behavior: {
-						onClick: function (data) {
-							var msg = "You clicked on an event: { start: " + data.start.toString("d/M/yyyy") + ", end: " + data.end.toString("d/M/yyyy") + " }";
-							$("#eventMessage").text(msg);
+		$(function () {
+			// =========== JSON data start ============ //
+			var ganttData = [
+				{
+					id: 1, name: "Sanket Mane", departmentName: "UI development", utilisationPercantage: 54, projectCount: '4', reportingManager: 'Bhushan Koli', series: [
+						{ name: "USGI", task: "UI development", start: new Date(2022, 00, 01), end: new Date(2022, 00, 03), color: '#C2E7F1', bookingType: 'major' },
+						{ name: "ICICI Video KYC", task: "UI development", start: new Date(2022, 00, 02), end: new Date(2022, 00, 05), color: "#F3FBD2", bookingType: 'minor' },
+						{ name: "USGI", task: "UI development", start: new Date(2022, 00, 25), end: new Date(2022, 00, 27), color: '#C2E7F1', bookingType: 'minor' },
+						{
+							name: "USGI", task: "UI development", start: new Date(2022, 00, 25), end: new Date(2022, 03, 30), color: '#C2E7F1',
+							bookingType: 'minor'
 						},
-						onResize: function (data) {
-							var msg = "You resized an event: { start: " + data.start.toString("d/M/yyyy") + ", end: " + data.end.toString("d/M/yyyy") + " }";
-							$("#eventMessage").text(msg);
-							// console.log(data);
+					]
+				},
+				{
+					id: 2, name: "Sagar Donga", departmentName: "UI/UX Designer", utilisationPercantage: 10, projectCount: '3', reportingManager: 'Aditi Mehta', series: [
+						{ name: "Kotak Security", task: "UI Design", start: new Date(2022, 00, 05), end: new Date(2022, 00, 20), bookingType: 'major' },
+						{ name: "WCT", task: "UI Design", start: new Date(2022, 00, 06), end: new Date(2022, 00, 17), color: "#C2E7F1", bookingType: 'major' },
+						{ name: "Axis POC", task: "UI Design", start: new Date(2022, 00, 06), end: new Date(2022, 00, 17), color: "#e0e0e0", bookingType: 'minor' }
+					]
+				},
+				{
+
+					id: 3, name: "Ankita Kashyap", departmentName: "Buisness Analyst", utilisationPercantage: 15, projectCount: '2', reportingManager: 'Neha Modgil', series: [
+						{ name: "Ninja Timesheet", task: "Lorem ipsum dolor sit amet.", start: new Date(2022, 00, 11), end: new Date(2022, 01, 03), bookingType: "minor", color: '#FCDABE' },
+						{ name: "Bajaj Allianz", task: "Lorem ipsum dolor sit", start: new Date(2022, 00, 15), end: new Date(2022, 01, 03), color: "#C2E7F1", bookingType: "major" }
+					]
+
+				},
+				{
+					id: 4, name: "Aman Khan", departmentName: "Project Manager", utilisationPercantage: 40, projectCount: '2', reportingManager: 'Priyanka Pandey', series: [
+						{
+							name: "SBIL", task: "Team and Client collaboration", start: new Date(2022, 01, 01), end: new Date(2022, 01, 03),
+							bookingType: "minor", color: '#D7F2CE'
 						},
-						onDrag: function (data) {
-							var msg = "You dragged an event: { start: " + data.start.toString("d/M/yyyy") + ", end: " + data.end.toString("d/M/yyyy") + " }";
-							$("#eventMessage").text(msg);
-						}
-					}
-				});
-				$('.insert-record').each(function (index) {
-					// $(this).attr('onclick','openModal('+index+')');
-					$(this).attr('data-toggle', 'modal');
-					$(this).attr('data-target', 'resourceModal');
-					$(this).attr('data-id', index + 1);
-				})
+						{ name: "TATA AIA", task: "Requiremet gathering from client", start: new Date(2022, 01, 01), end: new Date(2022, 01, 05), color: "#F2C7CC", bookingType: "major" }
+					]
+				},
+				{
+					id: 5, name: "Akashata Mehta", departmentName: "Content", utilisationPercantage: 70, projectCount: '2', reportingManager: 'Neha Modgil', series: [
+						{ name: "USGI", task: "Content writing", start: new Date(2022, 02, 01), end: new Date(2022, 03, 20), bookingType: "major", color: "#C2E7F1"},
+						{ name: "ThermoFisher", task: "lorem ipsum", start: new Date(2022, 02, 01), end: new Date(2022, 03, 26), color: "#f0f0f0", bookingType: "minor", color: '#FFFF00' }
+					]
+				},
+				{
+					id: 6, name: "Sunil Babu", departmentName: "Backend Development", utilisationPercantage: 45, projectCount: '4', reportingManager: 'Mohammad Ansari', series: [
+						{ name: "HDFC Life", task: "API creation", start: new Date(2022, 00, 05), end: new Date(2022, 00, 20), bookingType: "major", color: "#C0C2E2" },
+						{ name: "PolicyBazar", task: "Database creation", start: new Date(2022, 00, 06), end: new Date(2022, 00, 17), color: "#ADD8E6", bookingType: 'minor' },
+						{ name: "USGI", task: "Functional Task", start: new Date(2022, 00, 04), end: new Date(2022, 00, 20), color: "#C2E7F1", bookingType: "major" },
+						{ name: "Zerodha", task: "Bugs solving", start: new Date(2022, 00, 06), end: new Date(2022, 00, 20), color: "#D7F2CE", bookingType: "minor" },
+					]
+				},
+				{
+					id: 7, name: "Sanket Patil", departmentName: "UI Developer", utilisationPercantage: 50, projectCount: '1', reportingManager: 'Hitesh Mistry', series: [
+						{ name: "Hindustan Uneliver", task: "UI development", start: new Date(2022, 00, 11), end: new Date(2022, 01, 03), bookingType: "major", color: "#FFFF00"}
+					]
+				},
+				{
+					id: 8, name: "Umang Panchal", departmentName: "Marketing", utilisationPercantage: 55, projectCount: '2', reportingManager: 'Neha Modgil', series: [
+						{ name: "TATA Captial", task: "lorem ipsum", start: new Date(2022, 01, 01), end: new Date(2022, 01, 03), bookingType: "major" , color: "#C2E7F1"},
+						{ name: "Bajaj 360 Web App", task: "Lorem, ipsum dolor.", start: new Date(2022, 01, 01), end: new Date(2022, 01, 05), color: "#F3FBD2", bookingType: "minor" }
+					]
 
-				// open modal popup
-				$('.insert-record').click(function () {
-					$('.backdrop').addClass('open');
-					$('.custom-modal').addClass('animated_modal');
-					openModel($(this).attr('data-id'), ganttData);
-				})
-				// close modal popup
-				$('.close-icon').click(function () {
-					$('.backdrop').removeClass('open');
-					$('.custom-modal').removeClass('animated_modal');
-				})
+				}
+			];
+			// =========== JSON data end ============ //
 
+			$("#ganttChart").ganttView({
+				data: ganttData,
+				slideWidth: 900,
+				behavior: {
+					onClick: function (data) {
+						console.log(data);
+						$('.backdrop').addClass('open');
+						var msg = "You clicked on an event: { start: " + data.start.toString("d/M/yyyy") + ", end: " + data.end.toString("d/M/yyyy") + " }";
+						// $("#eventMessage").text(msg);
+						$('#editResource').addClass('animated_modal');
 
-				// $("#ganttChart").ganttView("setSlideWidth", 600);
-				// call again entry is done
-				function loadChart() {
-					alert('again render chart')
-					$("#ganttChart").ganttView({
-						data: ganttData,
-						slideWidth: 900,
-						behavior: {
-							onClick: function (data) {
-								var msg = "You clicked on an event: { start: " + data.start.toString("d/M/yyyy") + ", end: " + data.end.toString("d/M/yyyy") + " }";
-								$("#eventMessage").text(msg);
-							},
-							onResize: function (data) {
-								var msg = "You resized an event: { start: " + data.start.toString("d/M/yyyy") + ", end: " + data.end.toString("d/M/yyyy") + " }";
-								$("#eventMessage").text(msg);
-								// console.log(data);
-							},
-							onDrag: function (data) {
-								var msg = "You dragged an event: { start: " + data.start.toString("d/M/yyyy") + ", end: " + data.end.toString("d/M/yyyy") + " }";
-								$("#eventMessage").text(msg);
+						// ==== Edit Resource Booking start === //
+						$('#editTaskType').val(data.task);
+						$('#editProjectName option').each(function () {
+							if ($(this).val() == data.name) {
+								$(this).attr('selected', true)
+								$(this).siblings().attr('selected', false);
 							}
-						}
-					});
-					
-				}
-
-				function openModel(index, data) {
-					for (var i in data) {
-						if (index == data[i].id) {
-							// console.log(index,data[i].id);
-							var resourceBooking;
-							$('#resourceForm').submit(function (e) {
-								resourceBooking = "";
-								e.preventDefault();
-								resourceBooking = { name: $('#projectName').val(), start: new Date($('#startDate').val()), end: new Date($('#endDate').val()), color: '#777' },
-									data[i].series.push(resourceBooking);
-								console.log(data[i].series);
-								loadChart();
-							})
-						}
+						})
+						$('#editBookingType option').each(function(){
+							if($(this).val()== data.bookingType) {
+								$(this).attr('selected', true)
+								$(this).siblings().attr('selected', false);
+							}
+						})
+						$('#editStartDate').val(data.start.toString('yyyy-MM-dd'));
+						$('#editEndDate').val(data.end.toString('yyyy-MM-dd'));
+						// ==== Edit Resource Booking end === //						
+					},
+					onResize: function (data) {
+						var msg = "You resized an event: { start: " + data.start.toString("d/M/yyyy") + ", end: " + data.end.toString("d/M/yyyy") + " }";
+						// $("#eventMessage").text(msg);
+					},
+					onDrag: function (data) {
+						var msg = "You dragged an event: { start: " + data.start.toString("d/M/yyyy") + ", end: " + data.end.toString("d/M/yyyy") + " }";
+						// $("#eventMessage").text(msg);
 					}
 				}
-
+			});
+			
+			$('.insert-record').each(function (index) {
+				// $(this).attr('onclick','openModal('+index+')');
+				$(this).attr('data-toggle', 'modal');
+				$(this).attr('data-target', 'resourceModal');
+				$(this).attr('data-id', index + 1);
 			})
-	
+
+			// open modal popup
+			$('.insert-record').click(function () {
+				$('.backdrop').addClass('open');
+				$('#addResource').addClass('animated_modal');
+				// openModel($(this).attr('data-id'), ganttData);
+			})
+			// close modal popup
+			$('.close-icon').click(function () {
+				$('.backdrop').removeClass('open');
+				$('#addResource').removeClass('animated_modal');
+				$('#editResource').removeClass('animated_modal');
+			})
+
+
+
+
+		})
+
 	</script>
 </body>
 
